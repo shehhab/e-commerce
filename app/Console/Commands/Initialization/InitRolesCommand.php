@@ -34,7 +34,7 @@ class InitRolesCommand extends Command
             'description' => 'unique stories and descriptions of your products is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra, a powerful product description generator which can help you create',
         ]);
 
-        $imagePath2 = asset('product/1');
+        $imagePath2 = asset('product/1.png');
 
         $Product2->addMediaFromUrl($imagePath2)->toMediaCollection('product_image');
 
