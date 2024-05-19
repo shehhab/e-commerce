@@ -37,37 +37,7 @@ class InitRolesCommand extends Command
 
         $Product1->addMediaFromUrl($imagePath1)->toMediaCollection('product_image');
         
-        $Product2 = Product::create([
-            'name' => 'hp 2',
-            'price'=> '500',
-            'description' => 'unique stories and descriptions of your products is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra, a powerful product description generator which can help you create',
-        ]);
-
-        $imagePath2 = asset('product/1.png');
-
-        $Product2->addMediaFromUrl($imagePath2)->toMediaCollection('product_image');
-
-
-
-        $Product3 = Product::create([
-            'name' => 'hp 3',
-            'price'=> '5200',
-            'description' => 'and descriptions of your products is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra,a powerful product description generator which can help you create',
-        ]);
-
-        $imagePath3 = asset('product/4.png');
-
-        $Product3->addMediaFromUrl($imagePath3)->toMediaCollection('product_image');
-
-        $Product4 = Product::create([
-            'name' => 'hp 4',
-            'price'=> '80000',
-            'description' => 'and  of your  is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra,a powerful product description generator which can help you create',
-        ]);
-
-        $imagePath4 = asset('product/3.png');
-
-        $Product4->addMediaFromUrl($imagePath4)->toMediaCollection('product_image');
+  
 
     }
 
