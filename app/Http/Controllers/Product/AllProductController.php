@@ -20,6 +20,7 @@ class AllProductController extends Controller
                 'qty' => $product->qty,
                 'description' => $product->description,
                 'image' => asset('storage/' . $product->image), // Generate URL for the image
+                
             ];
         });
 
