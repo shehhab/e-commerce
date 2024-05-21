@@ -21,8 +21,6 @@ class Product_DetailsController extends Controller
             return $this->handleResponse(status:false, message:'Product Not Found', code:404);
         }
         // Get the URL of the worker's profile image from the 'user_profile_image' collection
-        $profileImage = $product->getFirstMedia('product_image');
-        $profileImageUrl = $profileImage ? $profileImage->getUrl() : asset('Default/profile.jpeg');
 
         // Format the Product data
         $formattedWorker = [
@@ -30,7 +28,7 @@ class Product_DetailsController extends Controller
             'name' => $product->name,
             'qty' => $product->qty,
             'description' => $product->description,
-            'profile_image_url' => $profileImageUrl,
+            'image' => asset('storage/' . $product->image), // Generate URL for the image
         ];
 
         return $this->handleResponse(status: true, data: $formattedWorker);
