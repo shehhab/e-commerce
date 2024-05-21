@@ -13,6 +13,7 @@ use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\Authentication\ChangePasswordController;
 use App\Http\Controllers\Authentication\ForgetPasswordController;
 use App\Http\Controllers\Product\AllProductController;
+use App\Http\Controllers\Product\Product_DetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::group(['prefix' => 'v1/user'], function () {
 
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/product/All_Product', AllProductController::class);
+    Route::get('/product/details', Product_DetailsController::class);
 
     
     Route::group(['middleware' => 'auth:sanctum'], function () {
