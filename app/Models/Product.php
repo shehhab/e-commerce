@@ -15,7 +15,9 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'price',
+        'qty',
         'description',
+        'image'
     ];
 
     public function registerMediaCollections(): void
