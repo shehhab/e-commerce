@@ -37,14 +37,6 @@ class LoginController extends Controller
             RateLimiter::hit('send-message:'.auth()->user());
 
 
-            if (!auth()->user()->email_verified_at) {
-                $otp = new Otp;
-                $code = $otp->generate($validatedData['email'],'numeric',4, 5);
-
-                Mail::to($validatedData['email'])->send(new EmailVerification($user,$code->token));
-
-                return $this->handleResponse(status:false, code:200 ,message:'Email not verified! Please verify your email.',data: new LoginResources($user));
-            }
 
             return $this->handleResponse(status:true,message:'Welcome Back '. $user->name , data: new LoginResources($user));
         }

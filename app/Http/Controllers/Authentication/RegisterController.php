@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'] ?? null,
+            'email_verified_at'=>now() , 
             'password' => Hash::make($validatedData['password']),
             'password_confirme' => Hash::make($validatedData['password_confirme']),
         ]);
@@ -35,13 +36,9 @@ class RegisterController extends Controller
 
         // after register operation
         // 1- send email verification notification contains OTP
-        $otp = new Otp;
-        $code = $otp->generate($validatedData['email'],'numeric',4, 5);
-
-        Mail::to($validatedData['email'])->send(new EmailVerification($user,$code->token));
 
         // 2- send api response to front
-        return $this->handleResponse(message:'Successfully Created Account , Verify Your Email please',data:new RegisterResources($user));
+        return $this->handleResponse(message:'Successfully Created Account',data:new RegisterResources($user));
 
     }
 
