@@ -22,11 +22,10 @@ class RegisterController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'] ?? null,
-            'email_verified_at'=>now() , 
             'password' => Hash::make($validatedData['password']),
+            'email_verified_at' => now(),
             'password_confirme' => Hash::make($validatedData['password_confirme']),
         ]);
-
 
         RateLimiter::hit('send-message:'.auth()->user());
 
@@ -34,8 +33,6 @@ class RegisterController extends Controller
             $user->addMediaFromRequest('image')->toMediaCollection('user_profile_image');
         }
 
-        // after register operation
-        // 1- send email verification notification contains OTP
 
         // 2- send api response to front
         return $this->handleResponse(message:'Successfully Created Account',data:new RegisterResources($user));

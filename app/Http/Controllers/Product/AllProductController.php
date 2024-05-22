@@ -11,7 +11,7 @@ class AllProductController extends Controller
     public function __invoke()
     {
         $products = Product::with('media')->get()->map(function ($product) {
- 
+
 
             return [
                 'id' => $product->id,
@@ -20,7 +20,6 @@ class AllProductController extends Controller
                 'qty' => $product->qty,
                 'description' => $product->description,
                 'image' => asset('storage/' . $product->image), // Generate URL for the image
-                
             ];
         });
 

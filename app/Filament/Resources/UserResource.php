@@ -23,7 +23,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                
             ]);
     }
 
@@ -31,28 +31,30 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
-    
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('phone_number')
+
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,5 +62,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }

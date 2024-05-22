@@ -17,6 +17,7 @@ class RegisterResources extends JsonResource
             "name"  => $this->whenHas('name'),
             "email" => $this->whenHas('email'),
             "phone_number"  => $this->whenHas('phone_number'),
+            //'image'=>$this->getFirstMediaUrl('user_profile_image')?:$defaultImage,
 
         ];
     }

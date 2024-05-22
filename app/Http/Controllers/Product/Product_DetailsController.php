@@ -20,7 +20,6 @@ class Product_DetailsController extends Controller
         if (!$product) {
             return $this->handleResponse(status:false, message:'Product Not Found', code:404);
         }
-        // Get the URL of the worker's profile image from the 'user_profile_image' collection
 
         // Format the Product data
         $formattedWorker = [

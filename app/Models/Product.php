@@ -17,12 +17,25 @@ class Product extends Model implements HasMedia
         'price',
         'qty',
         'description',
-        'image'
+        'image',
     ];
 
     public function registerMediaCollections(): void
         {
-            $this->addMediaCollection('product_image');
+            $this->addMediaCollection('product_image')->useDisk('media')
+            ;
         }
+        public function carts()
+        {
+            return $this->hasMany(Cart::class);
+        }
+
+        public function users()
+        {
+            return $this->belongsToMany(User::class, 'carts')
+                        ->withPivot('qty')
+                        ->withTimestamps();
+        }
+
 
 }

@@ -12,7 +12,6 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\FileUpload;
 
 class ProductResource extends Resource
 {
@@ -26,12 +25,11 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('price')->required()->numeric(),
-                Forms\Components\TextInput::make('qty')->required(),
+                Forms\Components\TextInput::make('qty')->required()->numeric(),
                 Forms\Components\TextInput::make('description')->required(),
-                FileUpload::make('image'),
+                Forms\Components\FileUpload::make('image')->required(),
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -42,8 +40,6 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('qty'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\ImageColumn::make('image')
-    
-
             ])
             ->filters([
                 //
@@ -51,20 +47,19 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
-
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -72,5 +67,5 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
-    }    
+    }
 }

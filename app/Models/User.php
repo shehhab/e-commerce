@@ -46,4 +46,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'carts')
+                    ->withPivot('qty')
+                    ->withTimestamps();
+    }
+
 }

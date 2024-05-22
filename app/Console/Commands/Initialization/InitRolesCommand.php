@@ -2,11 +2,9 @@
 
 namespace App\Console\Commands\Initialization;
 
-use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
 
 class InitRolesCommand extends Command
 {
@@ -29,13 +27,38 @@ class InitRolesCommand extends Command
      */
     public function handle()
     {
-        $admin = User::create([
-            'name' => 'admin',
-            'email'=> 'admin@admin.com',
-            'password' => Hash::make('123456789'),
-
+        
+        $Product2 = Product::create([
+            'name' => 'hp 2',
+            'price'=> '500',
+            'description' => 'unique stories and descriptions of your products is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra, a powerful product description generator which can help you create',
         ]);
 
+        $imagePath2 = asset('product/1.png');
+
+        $Product2->addMediaFromUrl($imagePath2)->toMediaCollection('product_image');
+
+
+
+        $Product3 = Product::create([
+            'name' => 'hp 3',
+            'price'=> '5200',
+            'description' => 'and descriptions of your products is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra,a powerful product description generator which can help you create',
+        ]);
+
+        $imagePath3 = asset('product/2.png');
+
+        $Product3->addMediaFromUrl($imagePath3)->toMediaCollection('product_image');
+
+        $Product4 = Product::create([
+            'name' => 'hp 4',
+            'price'=> '80000',
+            'description' => 'and  of your  is never easy or swift -it takes time and effort that could be spent elsewhere. Meet Descra,a powerful product description generator which can help you create',
+        ]);
+
+        $imagePath4 = asset('product/2.png');
+
+        $Product4->addMediaFromUrl($imagePath4)->toMediaCollection('product_image');
 
     }
 

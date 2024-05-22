@@ -28,15 +28,11 @@ class LoginController extends Controller
             if (RateLimiter::tooManyAttempts('send-message:'.auth()->user(), $perMinute = 3)) {
                 $seconds = RateLimiter::availableIn('send-message:'.auth()->user());
 
-
                 return $this->handleResponse(status:false,message:'too Many Attempts , You may try again in '.$seconds.' seconds.' , code:429);
-
 
             }
 
             RateLimiter::hit('send-message:'.auth()->user());
-
-
 
             return $this->handleResponse(status:true,message:'Welcome Back '. $user->name , data: new LoginResources($user));
         }
@@ -53,10 +49,7 @@ class LoginController extends Controller
 
         RateLimiter::hit('send-message:'.auth()->user());
 
-
         return $this->handleResponse( code:401 ,status: false, message: 'Wrong Email Or Password!');
-
-
 
     }
 }

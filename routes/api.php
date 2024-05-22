@@ -2,18 +2,24 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Cart\AddToCartController;
+use App\Http\Controllers\Cart\ShowAllCartController;
+use App\Http\Controllers\Product\AllProductController;
 use App\Http\Controllers\Authentication\LoginController;
+use App\Http\Controllers\Cart\ChackoutSessionController;
 use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Authentication\ValidOTPController;
+use App\Http\Controllers\Product\Product_DetailsController;
+use App\Http\Controllers\Cart\ClearProductFromCartController;
+use App\Http\Controllers\Cart\DetetProductFromCartController;
 use App\Http\Controllers\Authentication\VerifyEmailController;
+use App\Http\Controllers\Payment\PaymentInformationController;
 use App\Http\Controllers\Authentication\DeleteAccountController;
 use App\Http\Controllers\Authentication\ResendOTPCodeController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\Authentication\ChangePasswordController;
 use App\Http\Controllers\Authentication\ForgetPasswordController;
-use App\Http\Controllers\Product\AllProductController;
-use App\Http\Controllers\Product\Product_DetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +59,14 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/product/All_Product', AllProductController::class);
     Route::get('/product/details', Product_DetailsController::class);
 
-    
-    Route::group(['middleware' => 'auth:sanctum'], function () {
 
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('/cart/add', AddToCartController::class);
+        Route::delete('/cart/delete', DetetProductFromCartController::class);
+        Route::delete('/cart/clear', ClearProductFromCartController::class);
+        Route::post('/checkout/session', ChackoutSessionController::class);
+        Route::post('/store-payment-information', [PaymentInformationController::class, 'store']);
+        Route::get('/show/cart', [ShowAllCartController::class, 'index']);
 
     });
 });
