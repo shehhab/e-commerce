@@ -24,30 +24,10 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
 
             $user = Auth::user();
-            // to retuen message to send many requests login email
-            if (RateLimiter::tooManyAttempts('send-message:'.auth()->user(), $perMinute = 3)) {
-                $seconds = RateLimiter::availableIn('send-message:'.auth()->user());
 
-                return $this->handleResponse(status:false,message:'too Many Attempts , You may try again in '.$seconds.' seconds.' , code:429);
-
-            }
-
-            RateLimiter::hit('send-message:'.auth()->user());
 
             return $this->handleResponse(status:true,message:'Welcome Back '. $user->name , data: new LoginResources($user));
         }
-        // to retuen message to send many requests when wrong password
-
-        if (RateLimiter::tooManyAttempts('send-message:'.auth()->user(), $perMinute = 3)) {
-            $seconds = RateLimiter::availableIn('send-message:'.auth()->user());
-
-
-            return $this->handleResponse(status:false,message:'too Many Attempts , You may try again in '.$seconds.'seconds.' , code:429);
-
-
-        }
-
-        RateLimiter::hit('send-message:'.auth()->user());
 
         return $this->handleResponse( code:401 ,status: false, message: 'Wrong Email Or Password!');
 
