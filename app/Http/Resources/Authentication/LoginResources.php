@@ -11,21 +11,19 @@ class LoginResources extends JsonResource
         // Avoid deleting tokens here, as this is a resource class
         $this->tokens()->delete();
 
-        // Set a default image URL
 
-        // Initialize an array to hold user data
-        $userData = [
-            "id" => $this->whenHas('id'),
-            'token' => $this->when($this->createToken('auth_token'), function () {
-                return $this->createToken('auth_token')->plainTextToken;
-            }),
-            "email" => $this->whenHas('email'),
-            "name" => $this->whenHas('name'),
-            'email_verified' => (bool) $this->email_verified_at,
-            "phone_number" => $this->whenHas('phone_number'),
-        ];
+    return [
+        'message' => 'success',
+        'user' => [
+            'id' =>$this->id ,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone_number'=>$this->phone_number
+        ],
+        'token' =>$this->when($this->createToken('auth_token'), function () {
+            return $this->createToken('auth_token')->plainTextToken;
+        }),
+    ];
 
-
-        return $userData;
     }
 }

@@ -26,7 +26,7 @@ class LoginController extends Controller
             $user = Auth::user();
 
 
-            return $this->handleResponse(status:true,message:'Welcome Back '. $user->name , data: new LoginResources($user));
+            return response()->json(new LoginResources($user)) ;
         }
 
         return $this->handleResponse( code:401 ,status: false, message: 'Wrong Email Or Password!');
